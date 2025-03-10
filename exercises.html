@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Async exercises</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <p id="test">Click me</p>
+  <p id="test-2">Click me again</p>
+
+  <script>
+    // --- Les fondamentaux de la gestion asynchrone en Javascript
+    // ----- Callbacks
+    // ----- Promises
+    // ----- async/await
+
+    // --- Méthodes natives Javascript gestion du timing, à l'aide d'un timer et d'un callback
+
+    // Exécute le callback une fois, après 5000ms (5s)
+    setTimeout(() => {
+      alert('Hello timeout!');
+    }, 5000);
+
+    // Exécute le callback toutes les 6000ms (6s), jusqu'à la suppression de la référence de l'intervalID
+    const myIntervalID = setInterval(() => {
+      alert('Hello interval!');
+    }, 6000);
+
+    // Clean la référence vers l'intervalle après 11 secondes
+    setTimeout(() => {
+      clearInterval(myIntervalID)
+    }, 11000);
+
+    // --- Callback hell illustration: un callback appelant un autre callback
+
+    myCallbackOfCallback = (data) => {
+      alert(JSON.stringify(data));
+    };
+
+    const myCallback = (e, callback) => {
+      console.log('Event natif: ', e);
+
+      // Process donnée
+      const data = {
+        name: 'John',
+        age: 25
+      };
+
+      callback(data);
+    };
+
+    document
+      .getElementById("test")
+      .addEventListener("click", (e) => {
+        myCallback(e, myCallbackOfCallback);
+      });
+
+    // Callback example
+    const myFunction = (str, callback) => {
+      console.log('Hello ' + str);
+      callback(str);
+    };
+
+    document
+      .getElementById("test-2")
+      .addEventListener("click", (e) => {
+        myFunction('whatever', (str) => {
+          alert('Callback called with ' + str);
+        });
+      });
+
+    // --- Promises
+    const myPromises = new Promise((resolve, reject) => {
+      try {
+        resolve(new Promise((resolve, reject) => {
+          resolve('Hello promise!');
+        }));
+      } catch (e) {
+        reject(e);
+      }
+    });
+
+    myPromises
+      .then((str) => str) // 1er resolve
+      .then((str) => { // 2eme resolve
+        alert('Round 2 ' + str);
+      })
+      .catch((e) => {
+        alert(e);
+      })
+      .finally(() => { // Toujours exécuté
+        alert('Finally!');
+      });
+
+    // --- Promise.all
+
+    const myPromisedFunction = (str) => {
+      return new Promise((resolve, reject) => {
+        resolve('Hello 1 ' + str);
+      });
+    };
+
+    const mySecondPromisedFunction = (str) => {
+      return new Promise((resolve, reject) => {
+        resolve('Hello 2' + str);
+      });
+    };
+
+    (async function() {
+      const [str1, str2] = await Promise.all([
+        myPromisedFunction('whatever'),
+        mySecondPromisedFunction('whatever')
+      ]);
+      alert(str1 + ' ' + str2);
+    })();
+  </script>
+</body>
+</html>
