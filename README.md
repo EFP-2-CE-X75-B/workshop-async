@@ -5,11 +5,11 @@ Le caractère de plusieures opérations qui ne se déroulent pas au même moment
 # Comment gérer l'asynchronisme en JS/Node.js ?
 
 -   Les 'callbacks functions'
--   async/await
 -   setTimeout/setInterval
 -   Les Promises
+-   async/await
 
-### Techniques moins courantes pour gérer l'asynchronisme
+### Techniques plus avancées / moins courantes pour gérer l'asynchronisme
 
 -   Les pattern observers
 -   Les observables
@@ -32,4 +32,8 @@ Des fonctions natives JavaScript, `setTimeout()`permet d'éxécuter une fonction
 
 ## Les Promises
 
-La première réponse au problèmes des callbacks. C'est une API qui permet de gérer l'asynchrone de manière plus lisible.
+La première réponse aux problèmes des callbacks. C'est une API qui permet de gérer l'asynchrone de manière plus lisible.
+
+## Async / await
+
+La seconde réponse aux problèmes des callbacks. L'API async await pousse les promesses un peu plus loin en permettant d'écrire et d'exécuter du code asynchrone comme s'il était synchrone.

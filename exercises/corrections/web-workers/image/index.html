@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image process with web workers</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section>
+      <h1 class="title title-xl">Heavy image process using web workers</h1>
+    </section>
+
+    <section>
+      <div class="control-panel">
+        <input type="file" id="image-input" accept="image/*">
+  
+        <div class="control-group">
+          <label for="pixel-size">Pixel size</label>
+          <input type="range" id="pixel-size" min="2" max="32" value="12">
+          <span id="pixel-size-value">12</span>
+        </div>
+  
+        <div class="control-group">
+          <label for="blur-radius">Blur radius</label>
+          <input type="range" id="blur-radius" min="1" max="20" value="7">
+          <span id="blur-radius-value">7</span>
+        </div>
+  
+        <div class="control-group">
+          <label for="iteration-count">Iterations</label>
+          <input type="range" id="iteration-count" min="1" max="10" value="1">
+          <span id="iteration-count-value">1</span>
+        </div>
+        
+        <button id="process-btn" class="btn">
+          <span class="loader"></span>
+          <span class="text">Process image</span>
+        </button>
+
+        <div id="processing-time" class="processing-time"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="image-container">
+        <canvas id="original-canvas"></canvas>
+        <canvas id="processed-canvas"></canvas>
+      </div>
+    </section>
+
+    <script src="image-effect.js"></script>
+  </body>
+</html>
